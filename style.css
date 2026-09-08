@@ -1,0 +1,319 @@
+:root {
+    --bg-dark: #0f172a;
+    --card-bg: #1e293b;
+    --border-color: #334155;
+    --text-main: #f8fafc;
+    --text-muted: #94a3b8;
+    --accent-blue: #38bdf8;
+    --accent-purple: #a855f7;
+    --accent-green: #22c55e;
+    --glow-color: rgba(56, 189, 248, 0.15);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Tajawal', 'Fira Code', sans-serif;
+}
+
+body {
+    background-color: var(--bg-dark);
+    color: var(--text-main);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    overflow-x: hidden;
+}
+
+.background-glow {
+    position: fixed;
+    top: -10%;
+    left: -10%;
+    width: 120%;
+    height: 120%;
+    background: radial-gradient(circle at 20% 20%, rgba(168, 85, 247, 0.1) 0%, transparent 40%),
+                radial-gradient(circle at 80% 80%, rgba(56, 189, 248, 0.1) 0%, transparent 40%);
+    z-index: -1;
+    pointer-events: none;
+}
+
+.container {
+    width: 100%;
+    max-width: 850px;
+}
+
+.app-header {
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+.app-header .logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.app-header h1 {
+    font-size: 2rem;
+    font-weight: 700;
+    background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.badge {
+    font-size: 0.8rem;
+    background: var(--border-color);
+    color: var(--accent-blue);
+    padding: 2px 8px;
+    border-radius: 12px;
+    vertical-align: middle;
+}
+
+.subtitle {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    margin-top: 5px;
+}
+
+.wizard-container {
+    position: relative;
+}
+
+.step-card {
+    display: none;
+    background: var(--card-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 16px;
+    padding: 25px;
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(8px);
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+.step-card.active {
+    display: block;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.step-header {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 15px;
+    margin-bottom: 20px;
+}
+
+.step-number {
+    background: linear-gradient(135deg, var(--accent-blue), var(--accent-purple));
+    color: #fff;
+    font-weight: bold;
+    padding: 5px 12px;
+    border-radius: 8px;
+    font-family: 'Fira Code', monospace;
+}
+
+.step-header h2 {
+    font-size: 1.25rem;
+    color: var(--text-main);
+}
+
+.step-body {
+    margin-bottom: 25px;
+}
+
+.step-footer {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    border-top: 1px solid var(--border-color);
+    padding-top: 15px;
+}
+
+.lang-selector {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px;
+}
+
+.lang-btn {
+    background: var(--bg-dark);
+    border: 2px solid var(--border-color);
+    color: var(--text-main);
+    padding: 15px;
+    border-radius: 12px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.lang-btn.active, .lang-btn:hover {
+    border-color: var(--accent-blue);
+    background: rgba(56, 189, 248, 0.05);
+}
+
+.algo-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 15px;
+}
+
+.algo-card, .mode-card {
+    cursor: pointer;
+}
+
+.algo-card input, .mode-card input {
+    display: none;
+}
+
+.algo-content, .mode-content {
+    background: var(--bg-dark);
+    border: 2px solid var(--border-color);
+    border-radius: 12px;
+    padding: 15px;
+    height: 100%;
+    transition: all 0.2s ease;
+}
+
+.algo-card input:checked + .algo-content,
+.mode-card input:checked + .mode-content {
+    border-color: var(--accent-purple);
+    box-shadow: 0 0 15px rgba(168, 85, 247, 0.2);
+    background: rgba(168, 85, 247, 0.05);
+}
+
+.algo-icon, .mode-icon {
+    font-size: 1.5rem;
+    margin-bottom: 8px;
+    display: block;
+}
+
+.algo-content h3 {
+    font-size: 1rem;
+    color: var(--accent-blue);
+    margin-bottom: 5px;
+}
+
+.algo-content p {
+    font-size: 0.8rem;
+    color: var(--text-muted);
+}
+
+.mode-selector {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.mode-content {
+    text-align: center;
+    padding: 20px;
+    font-size: 1.1rem;
+    font-weight: 600;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+textarea, input[type="text"], input[type="number"] {
+    width: 100%;
+    background: var(--bg-dark);
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    color: var(--text-main);
+    padding: 12px;
+    font-size: 1rem;
+    outline: none;
+    transition: border 0.2s ease;
+}
+
+textarea:focus, input:focus {
+    border-color: var(--accent-blue);
+}
+
+.btn {
+    padding: 10px 20px;
+    border-radius: 8px;
+    border: none;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-primary { background: var(--accent-blue); color: #000; }
+.btn-primary:hover { opacity: 0.9; }
+
+.btn-secondary { background: var(--border-color); color: var(--text-main); }
+.btn-secondary:hover { background: #475569; }
+
+.btn-success { background: var(--accent-purple); color: #fff; }
+.btn-success:hover { opacity: 0.9; }
+
+.result-box {
+    background: var(--bg-dark);
+    border: 1px solid var(--accent-blue);
+    border-radius: 10px;
+    padding: 15px;
+    margin-bottom: 20px;
+}
+
+.result-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+    font-weight: 600;
+}
+
+.btn-copy {
+    background: var(--border-color);
+    border: none;
+    color: var(--text-main);
+    padding: 4px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.8rem;
+}
+
+.explanation-box {
+    background: var(--bg-dark);
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    padding: 15px;
+}
+
+.explanation-box h3 {
+    font-size: 0.95rem;
+    color: var(--accent-purple);
+    margin-bottom: 10px;
+}
+
+pre {
+    font-family: 'Fira Code', monospace;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    color: var(--text-muted);
+    font-size: 0.85rem;
+    line-height: 1.5;
+}
