@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CryptoLab - منصة التشفير التفاعلية</title>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="background-glow"></div>
+
+    <div class="container">
+        <!-- Header -->
+        <header class="app-header">
+            <div class="logo">
+                <span class="icon">🔒</span>
+                <h1>CryptoLab <span class="badge">v1.0</span></h1>
+            </div>
+            <p id="app-subtitle" class="subtitle">منصة تشفير وفك تشفير النصوص التفاعلية</p>
+        </header>
+
+        <!-- Main Wizard Container -->
+        <main class="wizard-container">
+
+            <!-- Step 1: Language Selection -->
+            <section class="step-card active" id="step-1">
+                <div class="step-header">
+                    <span class="step-number">01</span>
+                    <h2 id="title-step-1">اختر لغة الواجهة والنص</h2>
+                </div>
+                <div class="step-body">
+                    <div class="lang-selector">
+                        <button class="lang-btn active" data-lang="ar" onclick="selectLanguage('ar')">
+                            <span class="flag">🇸🇦</span> العربية
+                        </button>
+                        <button class="lang-btn" data-lang="en" onclick="selectLanguage('en')">
+                            <span class="flag">🇺🇸</span> English
+                        </button>
+                    </div>
+                </div>
+                <div class="step-footer">
+                    <button class="btn btn-primary" onclick="nextStep(2)" id="btn-next-1">المتابعة ➔</button>
+                </div>
+            </section>
+
+            <!-- Step 2: Algorithm Selection -->
+            <section class="step-card" id="step-2">
+                <div class="step-header">
+                    <span class="step-number">02</span>
+                    <h2 id="title-step-2">اختر خوارزمية التشفير</h2>
+                </div>
+                <div class="step-body">
+                    <div class="algo-grid">
+                        <label class="algo-card">
+                            <input type="radio" name="algorithm" value="caesar" checked onchange="updateDynamicInputs()">
+                            <div class="algo-content">
+                                <span class="algo-icon">🔑</span>
+                                <h3>Caesar Cipher</h3>
+                                <p id="desc-caesar">شفرة القيصر - الإزاحة البسيطة</p>
+                            </div>
+                        </label>
+
+                        <label class="algo-card">
+                            <input type="radio" name="algorithm" value="multiplicative" onchange="updateDynamicInputs()">
+                            <div class="algo-content">
+                                <span class="algo-icon">✖️</span>
+                                <h3>Multiplicative Cipher</h3>
+                                <p id="desc-multi">تشفير الضرب الحسابي</p>
+                            </div>
+                        </label>
+
+                        <label class="algo-card">
+                            <input type="radio" name="algorithm" value="vigenere" onchange="updateDynamicInputs()">
+                            <div class="algo-content">
+                                <span class="algo-icon">🔠</span>
+                                <h3>Vigenère Cipher</h3>
+                                <p id="desc-vigenere">التشفير متعدد المفاتيح</p>
+                            </div>
+                        </label>
+
+                        <label class="algo-card">
+                            <input type="radio" name="algorithm" value="pbox" onchange="updateDynamicInputs()">
+                            <div class="algo-content">
+                                <span class="algo-icon">🔀</span>
+                                <h3>P-Box Permutation</h3>
+                                <p id="desc-pbox">صندوق التبديل وتغيير الموازاة</p>
+                            </div>
+                        </label>
+
+                        <label class="algo-card">
+                            <input type="radio" name="algorithm" value="sbox" onchange="updateDynamicInputs()">
+                            <div class="algo-content">
+                                <span class="algo-icon">🔄</span>
+                                <h3>S-Box Substitution</h3>
+                                <p id="desc-sbox">صندوق الاستبدال الثابت</p>
+                            </div>
+                        </label>
+
+                        <label class="algo-card">
+                            <input type="radio" name="algorithm" value="des" onchange="updateDynamicInputs()">
+                            <div class="algo-content">
+                                <span class="algo-icon">🛡️</span>
+                                <h3>DES Cipher</h3>
+                                <p id="desc-des">معيار تشفير البيانات 56-bit</p>
+                            </div>
+                        </label>
+
+                        <label class="algo-card">
+                            <input type="radio" name="algorithm" value="rsa" onchange="updateDynamicInputs()">
+                            <div class="algo-content">
+                                <span class="algo-icon">🔐</span>
+                                <h3>RSA Algorithm</h3>
+                                <p id="desc-rsa">التشفير غير المتماثل (Public/Private)</p>
+                            </div>
+                        </label>
+
+                        <label class="algo-card">
+                            <input type="radio" name="algorithm" value="dsa" onchange="updateDynamicInputs()">
+                            <div class="algo-content">
+                                <span class="algo-icon">✍️</span>
+                                <h3>DSA / DS1</h3>
+                                <p id="desc-dsa">خوارزمية التوقيع الرقمي والتشفير</p>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+                <div class="step-footer">
+                    <button class="btn btn-secondary" onclick="prevStep(1)" id="btn-prev-2">⬅️ السابق</button>
+                    <button class="btn btn-primary" onclick="nextStep(3)" id="btn-next-2">المتابعة ➔</button>
+                </div>
+            </section>
+
+            <!-- Step 3: Operation Mode -->
+            <section class="step-card" id="step-3">
+                <div class="step-header">
+                    <span class="step-number">03</span>
+                    <h2 id="title-step-3">اختر نوع العملية</h2>
+                </div>
+                <div class="step-body">
+                    <div class="mode-selector">
+                        <label class="mode-card">
+                            <input type="radio" name="operation" value="encrypt" checked>
+                            <div class="mode-content">
+                                <span class="mode-icon">🔒</span>
+                                <span id="mode-encrypt-label">تشفير (Encrypt)</span>
+                            </div>
+                        </label>
+                        <label class="mode-card">
+                            <input type="radio" name="operation" value="decrypt">
+                            <div class="mode-content">
+                                <span class="mode-icon">🔓</span>
+                                <span id="mode-decrypt-label">فك تشفير (Decrypt)</span>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+                <div class="step-footer">
+                    <button class="btn btn-secondary" onclick="prevStep(2)" id="btn-prev-3">⬅️ السابق</button>
+                    <button class="btn btn-primary" onclick="nextStep(4)" id="btn-next-3">المتابعة ➔</button>
+                </div>
+            </section>
+
+            <!-- Step 4: Data & Keys Input -->
+            <section class="step-card" id="step-4">
+                <div class="step-header">
+                    <span class="step-number">04</span>
+                    <h2 id="title-step-4">إدخال البيانات والمفاتيح</h2>
+                </div>
+                <div class="step-body">
+                    <div class="form-group">
+                        <label for="text-input" id="label-text-input">النص المدخل:</label>
+                        <textarea id="text-input" rows="4" placeholder="أدخل النص هنا..."></textarea>
+                    </div>
+
+                    <!-- Dynamic Keys Container -->
+                    <div id="dynamic-keys-container" class="dynamic-keys"></div>
+                </div>
+                <div class="step-footer">
+                    <button class="btn btn-secondary" onclick="prevStep(3)" id="btn-prev-4">⬅️ السابق</button>
+                    <button class="btn btn-success" onclick="processCrypto()" id="btn-execute">⚡ تنفيذ العملية</button>
+                </div>
+            </section>
+
+            <!-- Step 5: Results & Explanations -->
+            <section class="step-card" id="step-5">
+                <div class="step-header">
+                    <span class="step-number">05</span>
+                    <h2 id="title-step-5">النتيجة والخطوات الحسابية</h2>
+                </div>
+                <div class="step-body">
+                    <div class="result-box">
+                        <div class="result-header">
+                            <span id="label-result">النتيجة النهائية:</span>
+                            <button class="btn-copy" onclick="copyResult()" id="btn-copy">📋 نسخ</button>
+                        </div>
+                        <textarea id="result-output" readonly rows="3"></textarea>
+                    </div>
+
+                    <div class="explanation-box">
+                        <h3 id="label-explanation">💡 الخطوات الحسابية والتوضيح:</h3>
+                        <pre id="math-steps">سيتم عرض خطوات المعالجة الحسابية هنا...</pre>
+                    </div>
+                </div>
+                <div class="step-footer">
+                    <button class="btn btn-secondary" onclick="prevStep(4)" id="btn-prev-5">⬅️ تعديل البيانات</button>
+                    <button class="btn btn-primary" onclick="resetWizard()" id="btn-reset">🔄 عملية جديدة</button>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
